@@ -51,6 +51,4 @@ public class Group {
     public double getGrade(int studentIndex) {
         return grades.getOrDefault(studentIndex, -1.0); // Zwraca -1.0, jeśli nie ma oceny dla danego studenta
     }
-
-
 }
