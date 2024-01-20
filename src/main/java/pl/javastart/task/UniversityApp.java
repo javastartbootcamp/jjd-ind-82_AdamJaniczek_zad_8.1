@@ -70,8 +70,10 @@ public class UniversityApp {
             if (!students.containsKey(index)) {
                 Student student = new Student(index, firstName, lastName);
                 students.put(index, student);
+                group.addStudent(students.get(index));
+            } else if (students.containsKey(index)) {
+                System.out.printf("Student o indeksie %d jest już w grupie %s", students.get(index).getIndex(), groups.get(groupCode).getCode());
             }
-            group.addStudent(students.get(index));
         } else {
             System.out.println("Grupa " + groupCode + " nie istnieje");
         }
@@ -122,8 +124,9 @@ public class UniversityApp {
      * @param grade        - ocena
      */
     public void addGrade(int studentIndex, String groupCode, double grade) {
-        if (students.containsKey(studentIndex) && groups.containsKey(groupCode)) {
-            Student student = students.get(studentIndex);
+        if (!groups.containsKey(groupCode)) {
+            System.out.printf("Grupa %s nie istnieje", groupCode);
+        } else if (students.containsKey(studentIndex)) {
             Group group = groups.get(groupCode);
             if (!group.hasGrade(studentIndex)) {
                 group.addGrade(studentIndex, grade);
@@ -145,7 +148,6 @@ public class UniversityApp {
      */
     public void printGradesForStudent(int index) {
         if (students.containsKey(index)) {
-            Student student = students.get(index);
             for (Map.Entry<String, Group> entry : groups.entrySet()) {
                 String groupCode = entry.getKey();
                 Group group = entry.getValue();
@@ -174,6 +176,8 @@ public class UniversityApp {
                 Student student = students.get(studentIndex);
                 System.out.println(student.getIndex() + " " + student.getFirstName() + " " + student.getLastName() + ": " + grade);
             }
+        } else {
+            System.out.printf("Grupa %s nie istnieje", groupCode);
         }
     }
 
