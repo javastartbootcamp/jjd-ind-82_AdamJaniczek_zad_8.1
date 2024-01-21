@@ -71,7 +71,7 @@ public class UniversityApp {
                 Student student = new Student(index, firstName, lastName);
                 students.put(index, student);
                 group.addStudent(students.get(index));
-            } else if (students.containsKey(index)) {
+            } else {
                 System.out.printf("Student o indeksie %d jest już w grupie %s", students.get(index).getIndex(), groups.get(groupCode).getCode());
             }
         } else {
@@ -149,7 +149,6 @@ public class UniversityApp {
     public void printGradesForStudent(int index) {
         if (students.containsKey(index)) {
             for (Map.Entry<String, Group> entry : groups.entrySet()) {
-                String groupCode = entry.getKey();
                 Group group = entry.getValue();
                 if (group.hasGrade(index)) {
                     System.out.println(group.getName() + ": " + group.getGrade(index));
